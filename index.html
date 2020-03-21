@@ -1,0 +1,38 @@
+̥̥<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Chess Board from PGN</title>
+    <link rel="stylesheet" href="D:/ExternalPrograms/Frameworks/chessboardjs/css/chessboard-1.0.0.min.css">
+  </head>
+  <body>
+    <div id="board" style="width: 400px"></div>
+
+    <label for="pgn">PGN: </label>
+    <textarea name="pgn" id="pgn" rows="4" cols="50"></textarea>
+
+    <button onclick="changeBoard()">Show Board</button>
+
+    <!--
+    chessboard.js to render the board from FEN notation,
+    chess.js to convert PGN into FEN,
+    jquery required by chessboard.js
+    -->
+    <script src="D:/ExternalPrograms/Frameworks/jquery/3.4.1/jquery.min.js"></script>
+    <script src="D:/ExternalPrograms/Frameworks/chessboardjs/js/chessboard-1.0.0.js"></script>
+    <script src="D:/ExternalPrograms/Frameworks/chessjs/chess.js"></script>̥
+
+    <script type="text/javascript">
+        let board = new ChessBoard('board', 'start');         // board with starting position
+        let game = new Chess();                               // .load_pgn() method used later
+
+        let boardPGN = document.getElementById('pgn');
+
+        function changeBoard() {
+          console.log('PGN Changed');
+          game.load_pgn(boardPGN.value);
+          board.position(game.fen());
+        }
+    </script>
+  </body>
+</html>
